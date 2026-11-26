@@ -1,0 +1,32 @@
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Virtual environment
+.venv/
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# MLflow generated files
+mlflow.db
+mlflow.db-*
+mlartifacts/
+mlruns/
+
+# Monitoring database
+monitoring.db
+monitoring.db-*
+
+# Generated models
+models/
+
+# Generated reports
+outputs/
+
+# Prefect local files
+.prefect/
