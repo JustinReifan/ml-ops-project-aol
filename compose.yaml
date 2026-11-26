@@ -1,0 +1,20 @@
+services:
+  api:
+    # Build image berdasarkan Dockerfile
+    build: .
+
+    image: online-shopping-api
+
+    container_name: online-shopping-api
+
+    # Menghubungkan port host dengan container
+    ports:
+      - "127.0.0.1:8000:8000"
+
+    # Membagikan file antara host dan container
+    volumes:
+      - ./models:/app/models:ro
+      - ./runtime:/app/runtime
+
+    # Restart container jika terjadi kegagalan
+    restart: unless-stopped

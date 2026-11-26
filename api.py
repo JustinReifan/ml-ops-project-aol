@@ -20,13 +20,18 @@ app = FastAPI(title="Online Shopping Prediction API")
 # Membaca model sekali ketika aplikasi dimulai
 model = joblib.load("models/best_model.joblib")
 
+# Membuat folder penyimpanan database
+Path("runtime").mkdir(exist_ok=True)
+
+DB_PATH = "runtime/monitoring.db"
+
 # Membuat identitas versi berdasarkan isi file model
 model_version = hashlib.sha256(
     Path("models/best_model.joblib").read_bytes()
 ).hexdigest()
 
 # Membuat tabel untuk menyimpan riwayat prediksi
-with sqlite3.connect("monitoring.db") as conn:
+with sqlite3.connect(DB_PATH) as conn:
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS predictions (
@@ -91,7 +96,7 @@ def predict(data: VisitorData):
     probability = float(model.predict_proba(X)[0][1])
 
     # Menyimpan input dan hasil prediksi ke database
-    with sqlite3.connect("monitoring.db") as conn:
+    with sqlite3.connect(DB_PATH) as conn:
 
         cursor = conn.execute("""
             INSERT INTO predictions
@@ -119,7 +124,7 @@ def predict(data: VisitorData):
 def feedback(prediction_id: int, data: FeedbackData):
 
     # Memperbarui hasil pembelian aktual
-    with sqlite3.connect("monitoring.db") as conn:
+    with sqlite3.connect(DB_PATH) as conn:
 
         cursor = conn.execute("""
             UPDATE predictions

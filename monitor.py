@@ -37,7 +37,7 @@ PERFORMANCE_THRESHOLD = 0.10
 
 # STEP 2: Membaca 200 prediksi terakhir dari database
 
-with sqlite3.connect("monitoring.db") as conn:
+with sqlite3.connect("runtime/monitoring.db") as conn:
 
     logs = pd.read_sql_query("""
         SELECT * FROM predictions

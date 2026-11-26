@@ -63,7 +63,7 @@ def retrain():
 
 
     # STEP 4: Mengambil data pengunjung terbaru
-    with sqlite3.connect("monitoring.db") as conn:
+    with sqlite3.connect("runtime/monitoring.db") as conn:
 
         logs = pd.read_sql_query("""
             SELECT * FROM predictions

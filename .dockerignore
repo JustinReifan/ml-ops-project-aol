@@ -1,0 +1,6 @@
+
+# Hanya memasukkan file yang dibutuhkan untuk build
+*
+!Dockerfile
+!api.py
+!requirements-api.txt

@@ -30,3 +30,6 @@ outputs/
 
 # Prefect local files
 .prefect/
+
+# docker items
+runtime/
